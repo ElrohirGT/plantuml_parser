@@ -9,6 +9,9 @@ pub use accessibilities::*;
 pub mod modifiers;
 pub use modifiers::*;
 
+pub mod field;
+pub use field::*;
+
 pub fn parser_uml_inner_element(element: &str) -> IResult<&str, UMLElement> {
     let (rest, accessibility) = parse_accessibility(element)?;
     Ok((
@@ -17,7 +20,7 @@ pub fn parser_uml_inner_element(element: &str) -> IResult<&str, UMLElement> {
             name: "",
             field_type: "",
             accessibility: Accessibility::Private,
-            modifiers: vec![],
+            modifiers: Modifier::None,
         }),
     ))
 }
