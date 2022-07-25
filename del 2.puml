@@ -1,0 +1,72 @@
+@startuml
+
+' MODELO
+class Equipo {
+    - nombreEquipo: String
+    - posicionTorneo: int
+    - cantidadTirosEsquina: int
+    - cantidadJuegosGanados: int
+    - cantidadJuegosPerdidos: int 
+    - cantidadTirosAGol: int
+    - cantidadDeGoles: int
+    - cantidadTarjetasAmarillas: int
+    - cantidadTarjetasRojas: int
+    - cantidadFaltas: int
+
+    +<<create>> Equipo(nombre, posicion, tirosEsquina, juegosGanados, juegosPerdidos, tirosAGol, goles, amarillas, rojas, faltas)
+    + String getNombreEquipo()
+    + void setNombreEquipo(String nombre)
+    
+    + int getPosicionTorneo()
+    + void setPosicionTorneo(int posicion)
+    
+    + int getCantidadTirosEsquina()
+    + void setCantidadTirosEsquina(int tirosEsquina)
+    
+    + int getCantidadJuegosGanados()
+    + void setCantidadJuegosGanados(int juegosGanados)
+    
+    + int getCantidadJuegosPerdidos()
+    + void setCantidadJuegosPerdidos()
+
+    + int getCantidadTirosAGol()
+    + void CantidadTirosAGol()
+    
+    + int getCantidadDeGoles()
+    + void CantidadDeGoles(int goles)
+    
+    + int getCantidadTarjetasAmarillas()
+    + void CantidadTarjetasAmarillas(int amarillas)
+    
+    + int getCantidadTarjetasRojas()
+    + void setCantidadTarjetasRojas(int rojas)
+    
+    + int getCantidadFaltas()
+    + void setCantidadFaltas(int faltantes)
+}
+
+class AnalizadorEquipos {
+    - equipos: Equipo[]
+    + <<create>> AnalizadorEquipos(Equipo[] equipos)
+    + int getTotalGoles()
+    + int getTotalTirosEsquina()
+    + int getTotalAmarillas()
+    + int getTotalRojas()
+}
+
+' VISTA
+class VentanaPrograma {
+    - analizador: AnalizadorEquipos
+    + void main(String[] args)
+    + AccionUsuario preguntarUsuario()
+}
+
+enum AccionUsuario {
+    SALIR
+    TOTAL_GOLES
+    TOTAL_TIROS_ESQUINA
+    TOTAL_TARJETAS_AMARILLAS
+    TOTAL_TARJETAS_ROJAS
+}
+
+@enduml
