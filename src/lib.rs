@@ -20,7 +20,7 @@ pub fn parser_uml_inner_element(element: &str) -> IResult<&str, UMLElement> {
             name: "",
             field_type: "",
             accessibility: Accessibility::Private,
-            modifiers: Modifier::None,
+            modifier: Modifier::None,
         }),
     ))
 }
