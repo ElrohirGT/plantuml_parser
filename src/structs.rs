@@ -1,5 +1,4 @@
-use crate::Accessibility;
-use crate::Modifier;
+use crate::PlantUMLMethod;
 use crate::PlantUMLField;
 
 #[derive(Debug)]
@@ -7,21 +6,6 @@ pub enum UMLElement<'a> {
     UMLField(PlantUMLField<'a>),
     UMLMethod(PlantUMLMethod<'a>),
     UMLEnumVariant(PlantUMLEnum<'a>),
-}
-
-#[derive(Debug)]
-pub struct MethodArgument<'a> {
-    pub name: &'a str,
-    pub argument_type: &'a str,
-}
-
-#[derive(Debug)]
-pub struct PlantUMLMethod<'a> {
-    pub name: &'a str,
-    pub return_type: &'a str,
-    pub accessibility: Accessibility,
-    pub arguments: Vec<MethodArgument<'a>>,
-    pub modifiers: Modifier,
 }
 
 #[derive(Debug)]
