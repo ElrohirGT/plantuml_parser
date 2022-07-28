@@ -1,3 +1,4 @@
+use crate::enums::PlantUMLEnum;
 use crate::field::PlantUMLField;
 use crate::methods::PlantUMLMethod;
 
@@ -9,11 +10,6 @@ pub enum UMLElement<'a> {
 }
 
 #[derive(Debug)]
-pub struct PlantUMLEnumVariant<'a> {
-    pub name: &'a str,
-}
-
-#[derive(Debug)]
 pub struct PlantUMLClass<'a> {
     pub fields: Vec<PlantUMLField<'a>>,
     pub methods: Vec<PlantUMLMethod<'a>>,
@@ -22,9 +18,4 @@ pub struct PlantUMLClass<'a> {
 #[derive(Debug)]
 pub struct PlantUMLInterface<'a> {
     pub methods: Vec<PlantUMLMethod<'a>>,
-}
-
-#[derive(Debug)]
-pub struct PlantUMLEnum<'a> {
-    pub variants: Vec<PlantUMLEnumVariant<'a>>,
 }
