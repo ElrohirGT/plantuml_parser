@@ -1,9 +1,9 @@
-use nom::bytes::complete::take_while;
-use crate::parse_accessibility;
-use crate::parse_modifier;
-use crate::Accessibility;
-use crate::Modifier;
+use crate::accessibilities::parse_accessibility;
+use crate::accessibilities::Accessibility;
+use crate::modifiers::parse_modifier;
+use crate::modifiers::Modifier;
 use nom::bytes::complete::take_until;
+use nom::bytes::complete::take_while;
 use nom::bytes::streaming::tag;
 use nom::character::complete::space0;
 use nom::error::Error;
@@ -61,12 +61,8 @@ pub fn parse_field_type(element: &str) -> IResult<&str, &str> {
     let f_type = f_type.trim();
     if !f_type.is_empty() {
         Ok((rest, f_type))
-    }
-    else {
-        Err(Err::Error(Error::from_error_kind(
-            f_type,
-            ErrorKind::Fail,
-        )))
+    } else {
+        Err(Err::Error(Error::from_error_kind(f_type, ErrorKind::Fail)))
     }
 }
 
@@ -79,12 +75,15 @@ mod tests {
         let input = "- nombreEquipo: String";
         let output = parse_field(input).unwrap();
 
-        assert_eq!(output.1, PlantUMLField {
-            name: "nombreEquipo",
-            field_type: "String",
-            accessibility: Accessibility::Private,
-            modifier: Modifier::None
-        })
+        assert_eq!(
+            output.1,
+            PlantUMLField {
+                name: "nombreEquipo",
+                field_type: "String",
+                accessibility: Accessibility::Private,
+                modifier: Modifier::None
+            }
+        )
     }
 
     //PARSE FIELD TYPE

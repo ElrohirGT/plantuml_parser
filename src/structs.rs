@@ -1,5 +1,5 @@
-use crate::PlantUMLMethod;
-use crate::PlantUMLField;
+use crate::field::PlantUMLField;
+use crate::methods::PlantUMLMethod;
 
 #[derive(Debug)]
 pub enum UMLElement<'a> {

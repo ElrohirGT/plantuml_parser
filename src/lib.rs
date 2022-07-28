@@ -4,16 +4,16 @@ pub mod structs;
 pub use structs::*;
 
 pub mod accessibilities;
-pub use accessibilities::*;
+// pub use accessibilities::*;
 
 pub mod modifiers;
-pub use modifiers::*;
+// pub use modifiers::*;
 
 pub mod field;
-pub use field::*;
+// pub use field::*;
 
 pub mod methods;
-pub use methods::*;
+// pub use methods::*;
 
 // pub fn parser_uml_inner_element(element: &str) -> IResult<&str, UMLElement> {
 //     let (rest, accessibility) = parse_accessibility(element)?;
