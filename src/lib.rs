@@ -1,31 +1,33 @@
+pub mod accessibilities;
+pub mod enums;
+pub mod field;
+pub mod methods;
+pub mod modifiers;
+
+use crate::enums::PlantUMLEnumVariant;
+use crate::field::PlantUMLField;
+use crate::methods::PlantUMLMethod;
 use nom::IResult;
 
-pub mod structs;
-pub use structs::*;
+#[derive(Debug)]
+pub enum UMLElement<'a> {
+    UMLField(PlantUMLField<'a>),
+    UMLMethod(PlantUMLMethod<'a>),
+    UMLEnumVariant(PlantUMLEnum<'a>),
+}
 
-pub mod accessibilities;
-// pub use accessibilities::*;
+#[derive(Debug)]
+pub struct PlantUMLClass<'a> {
+    pub fields: Vec<PlantUMLField<'a>>,
+    pub methods: Vec<PlantUMLMethod<'a>>,
+}
 
-pub mod modifiers;
-// pub use modifiers::*;
+#[derive(Debug)]
+pub struct PlantUMLInterface<'a> {
+    pub methods: Vec<PlantUMLMethod<'a>>,
+}
 
-pub mod field;
-// pub use field::*;
-
-pub mod methods;
-// pub use methods::*;
-
-pub mod enums;
-
-// pub fn parser_uml_inner_element(element: &str) -> IResult<&str, UMLElement> {
-//     let (rest, accessibility) = parse_accessibility(element)?;
-//     Ok((
-//         "",
-//         UMLElement::UMLField(PlantUMLField {
-//             name: "",
-//             field_type: "",
-//             accessibility: Accessibility::Private,
-//             modifier: Modifier::None,
-//         }),
-//     ))
-// }
+#[derive(Debug, PartialEq)]
+pub struct PlantUMLEnum<'a> {
+    pub variants: Vec<PlantUMLEnumVariant<'a>>,
+}

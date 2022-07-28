@@ -6,11 +6,6 @@ pub struct PlantUMLEnumVariant<'a> {
     pub name: &'a str,
 }
 
-#[derive(Debug, PartialEq)]
-pub struct PlantUMLEnum<'a> {
-    pub variants: Vec<PlantUMLEnumVariant<'a>>,
-}
-
 pub fn parse_enum_variant(element: &str) -> IResult<&str, PlantUMLEnumVariant> {
     let (rest, name) = doesnt_have_spaces(("", element.trim()))?;
     Ok((rest, PlantUMLEnumVariant { name }))
