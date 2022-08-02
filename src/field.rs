@@ -3,9 +3,8 @@ use crate::accessibilities::Accessibility;
 use crate::modifiers::parse_modifier;
 use crate::modifiers::Modifier;
 use nom::bytes::complete::take_until;
-use nom::bytes::complete::take_while;
-use nom::bytes::streaming::tag;
 use nom::character::complete::space0;
+use nom::character::streaming::char;
 use nom::error::Error;
 use nom::error::ErrorKind;
 use nom::error::ParseError;
@@ -34,10 +33,10 @@ pub fn doesnt_have_spaces<'a>(element: (&'a str, &'a str)) -> IResult<&str, &str
 }
 
 pub fn parse_field(element: &str) -> IResult<&str, PlantUMLField> {
-    let (rest, accessibility) = parse_accessibility(element.trim())?;
-    let (rest, modifier) = parse_modifier(rest.trim())?;
-    let (rest, name) = parse_field_name(rest.trim())?;
-    let (rest, field_type) = parse_field_type(rest.trim())?;
+    let (rest, accessibility) = parse_accessibility(element.trim_start())?;
+    let (rest, modifier) = parse_modifier(rest.trim_start())?;
+    let (rest, name) = parse_field_name(rest.trim_start())?;
+    let (rest, field_type) = parse_field_type(rest.trim_start())?;
 
     Ok((
         rest,
@@ -56,8 +55,8 @@ pub fn parse_field_name(element: &str) -> IResult<&str, &str> {
 }
 
 pub fn parse_field_type(element: &str) -> IResult<&str, &str> {
-    let left_delimiter = pair(tag(":"), space0);
-    let (rest, f_type) = preceded(left_delimiter, take_while(|_| true))(element)?;
+    let left_delimiter = pair(char(':'), space0);
+    let (rest, f_type) = preceded(left_delimiter, take_until("\n"))(element)?;
     let f_type = f_type.trim();
     if !f_type.is_empty() {
         Ok((rest, f_type))
@@ -72,9 +71,10 @@ mod tests {
 
     #[test]
     fn parse_plantuml_field() {
-        let input = "- nombreEquipo: String";
+        let input = "\t- nombreEquipo: String\n";
         let output = parse_field(input).unwrap();
 
+        assert_eq!(output.0, "\n");
         assert_eq!(
             output.1,
             PlantUMLField {
@@ -89,10 +89,10 @@ mod tests {
     //PARSE FIELD TYPE
     #[test]
     fn parse_type() {
-        let input = ": String";
+        let input = ": String\n";
         let output = parse_field_type(input).unwrap();
 
-        assert_eq!(output, ("", "String"));
+        assert_eq!(output, ("\n", "String"));
     }
     #[test]
     fn parse_field_type_fails() {
