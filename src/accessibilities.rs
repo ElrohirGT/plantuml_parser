@@ -2,7 +2,7 @@ use nom::branch::alt;
 use nom::character::complete::char;
 use nom::IResult;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum Accessibility {
     Private,
     Protected,

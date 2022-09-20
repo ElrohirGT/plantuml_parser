@@ -13,7 +13,7 @@ use nom::sequence::preceded;
 use nom::Err;
 use nom::IResult;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct PlantUMLField<'a> {
     pub name: &'a str,
     pub field_type: &'a str,

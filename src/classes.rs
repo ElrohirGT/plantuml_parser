@@ -10,7 +10,7 @@ use nom::sequence::delimited;
 use nom::sequence::terminated;
 use nom::IResult;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct PlantUMLClass<'a> {
     pub name: &'a str,
     pub fields: Vec<PlantUMLField<'a>>,
@@ -126,9 +126,9 @@ mod tests {
             - analizador: AnalizadorEquipos
             + {static} void main(String[] args)
             + AccionUsuario preguntarUsuario()
-        }";
+}\n";
         let (rest, class) = parse_class(input).expect("Can't parse the class");
-        assert_eq!("        }", rest);
+        assert_eq!("}\n", rest);
         assert_eq!(
             class,
             PlantUMLClass {

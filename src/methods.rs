@@ -12,7 +12,7 @@ use nom::combinator::opt;
 use nom::multi::many0;
 use nom::sequence::preceded;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct MethodArgument<'a> {
     pub name: &'a str,
     pub argument_type: &'a str,
@@ -42,7 +42,7 @@ pub fn parse_method_arguments(element: &str) -> IResult<&str, Vec<MethodArgument
     ))(element)
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct PlantUMLMethod<'a> {
     pub name: &'a str,
     pub return_type: &'a str,

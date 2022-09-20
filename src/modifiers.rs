@@ -3,7 +3,7 @@ use nom::bytes::complete::tag;
 use nom::combinator::opt;
 use nom::IResult;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub enum Modifier {
     Abstract,
     Static,

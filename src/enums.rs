@@ -1,7 +1,7 @@
 use crate::field::doesnt_have_spaces;
 use nom::IResult;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct PlantUMLEnumVariant<'a> {
     pub name: &'a str,
 }
