@@ -44,6 +44,17 @@ mod tests {
     }
 
     #[test]
+    fn parse_interface_name_fails() {
+        let input = "interface ILlanta asdf {\n";
+        let result = parse_interface_name(input);
+        assert_eq!(true, result.is_err());
+
+        let input = "interface ILlanta asdf{\n";
+        let result = parse_interface_name(input);
+        assert_eq!(true, result.is_err());
+    }
+
+    #[test]
     fn parse_interface_works() {
         let input = "interface ICarro {
     - void Avanzar()
@@ -92,5 +103,17 @@ mod tests {
                 ]
             }
         );
+    }
+
+    #[test]
+    fn parse_interface_fails() {
+        let input = "interface ICarro  assd{
+    - void Avanzar()
+    + string Serie()
+    # boolean GetEncendido()
+    - void SetEncendido(boolean encendido)
+}\n";
+        let result = parse_interface(input);
+        assert_eq!(true, result.is_err());
     }
 }
