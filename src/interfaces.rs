@@ -24,7 +24,7 @@ pub fn parse_interface_name(element: &str) -> IResult<&str, &str> {
 
 pub fn parse_interface(element: &str) -> IResult<&str, PlantUMLInterface> {
     let (rest, name) = parse_interface_name(element)?;
-    let (rest, methods) = many0(terminated(parse_method, char('\n')))(rest)?;
+    let (rest, methods) = terminated(many0(terminated(parse_method, char('\n'))), char('}'))(rest)?;
 
     Ok((rest, PlantUMLInterface { name, methods }))
 }
@@ -63,7 +63,7 @@ mod tests {
     - void SetEncendido(boolean encendido)
 }\n";
         let (rest, interface) = parse_interface(input).expect("Coudln't parse the interface!");
-        assert_eq!("}\n", rest);
+        assert_eq!("\n", rest);
         assert_eq!(
             interface,
             PlantUMLInterface {
