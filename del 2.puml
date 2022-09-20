@@ -13,7 +13,7 @@ class Equipo {
     - cantidadTarjetasRojas: int
     - cantidadFaltas: int
 
-    +<<create>> Equipo(nombre, posicion, tirosEsquina, juegosGanados, juegosPerdidos, tirosAGol, goles, amarillas, rojas, faltas)
+    + {ctor} Equipo(nombre, posicion, tirosEsquina, juegosGanados, juegosPerdidos, tirosAGol, goles, amarillas, rojas, faltas)
     + String getNombreEquipo()
     + void setNombreEquipo(String nombre)
     
@@ -47,7 +47,7 @@ class Equipo {
 
 class AnalizadorEquipos {
     - equipos: Equipo[]
-    + <<create>> AnalizadorEquipos(Equipo[] equipos)
+    + {ctor} AnalizadorEquipos(Equipo[] equipos)
     + int getTotalGoles()
     + int getTotalTirosEsquina()
     + int getTotalAmarillas()
