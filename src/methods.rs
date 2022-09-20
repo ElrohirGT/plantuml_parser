@@ -55,7 +55,11 @@ pub struct PlantUMLMethod<'a> {
 pub fn parse_method(element: &str) -> IResult<&str, PlantUMLMethod> {
     let (rest, accessibility) = parse_accessibility(element.trim_start())?;
     let (rest, modifier) = parse_modifier(rest.trim_start())?;
-    let (rest, return_type) = take_until1(" ")(rest.trim_start())?;
+    let (rest, return_type) = if modifier == Modifier::Constructor {
+        (rest, "")
+    } else {
+        take_until1(" ")(rest.trim_start())?
+    };
     let (rest, name) = take_until1("(")(rest.trim_start())?;
     let (rest, arguments) = parse_method_arguments(rest[1..].trim_start())?;
 
@@ -125,6 +129,27 @@ mod tests {
                 accessibility: Accessibility::Public,
                 modifier: Modifier::Abstract,
                 return_type: "void",
+                arguments: vec![MethodArgument {
+                    name: "nombre",
+                    argument_type: "String"
+                }]
+            }
+        );
+    }
+    #[test]
+    fn parse_method_constructor() {
+        let input = "\t+ {ctor} NombreEquipo(String nombre)\n";
+        let output = parse_method(input);
+
+        assert!(output.is_ok());
+        let (_, output) = output.unwrap();
+        assert_eq!(
+            output,
+            PlantUMLMethod {
+                name: "NombreEquipo",
+                accessibility: Accessibility::Public,
+                modifier: Modifier::Constructor,
+                return_type: "",
                 arguments: vec![MethodArgument {
                     name: "nombre",
                     argument_type: "String"
