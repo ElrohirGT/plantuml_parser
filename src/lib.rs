@@ -2,6 +2,7 @@ pub mod accessibilities;
 pub mod classes;
 pub mod enums;
 pub mod field;
+pub mod interfaces;
 pub mod methods;
 pub mod modifiers;
 
@@ -19,12 +20,7 @@ pub enum UMLElement<'a> {
     UMLEnumVariant(PlantUMLEnum<'a>),
 }
 
-#[derive(Debug)]
-pub struct PlantUMLInterface<'a> {
-    pub methods: Vec<PlantUMLMethod<'a>>,
-}
-
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Eq)]
 pub struct PlantUMLEnum<'a> {
     pub variants: Vec<PlantUMLEnumVariant<'a>>,
 }
