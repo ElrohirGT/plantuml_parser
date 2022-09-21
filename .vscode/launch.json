@@ -7,16 +7,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in library 'plantuml_parser'",
+            "name": "Debug unit tests in library 'plantuml_class_diagram_parser'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
                     "--lib",
-                    "--package=plantuml_parser"
+                    "--package=plantuml_class_diagram_parser"
                 ],
                 "filter": {
-                    "name": "plantuml_parser",
+                    "name": "plantuml_class_diagram_parser",
                     "kind": "lib"
                 }
             },
