@@ -7,11 +7,11 @@
 //! - classes (abstract/static classes included)
 //! - enums
 //!
-//! This library doesn't check if the supplied input generates a logical code structure, if you define a method abstract and static, this library will take your word for it.
+//! This library doesn't check if the supplied input generates a logical code structure or make type checkings, this means that if you define that a method retuns a Dog it'll take your word for it.
 //!
 //! Here's an example of usage:
 //! ```rust
-//! use plantuml_parser::parse_uml_from_contents;
+//! use plantuml_class_diagram_parser::parse_uml_from_contents;
 //! let input = "class VentanaPrograma {
 //! - analizador: AnalizadorEquipos
 //! + {ctor} VentanaPrograma()
